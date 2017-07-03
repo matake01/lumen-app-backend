@@ -11,13 +11,13 @@ This boilerplate is developed with easy-to-delivery in mind, using CircleCI for 
 2. CircleCI detects the commit and initiates a new build
 - 2a. Builds a new Docker image.
 - 2b. Performs unit tests located in the 'tests' folder.
-- 2c. Performs some CURL requests against the Docker container.
+- 2c. Performs some CURL requests against the Docker container to see if it behaves as we want.
 3. If the tests passes CircleCI initiates the deployment
 - 3a. Pushes the new Docker version to the DockerHub.
-- 3b. Creates a new Elastic Beanstalk version
-- 3c. Copies the new version to AWS S3
-- 3d. Creates an application version at Elastic Beanstalk
-- 3e. Updates Elastic Beanstalk to the new version
+- 3b. Creates a new Elastic Beanstalk version.
+- 3c. Copies the new version to AWS S3.
+- 3d. Creates an application version at Elastic Beanstalk.
+- 3e. Updates Elastic Beanstalk to the new version.
 ```
 
 ## Techniques used
