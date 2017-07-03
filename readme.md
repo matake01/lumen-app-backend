@@ -6,6 +6,7 @@ This boilerplate is developed with easy-to-delivery in mind, using CircleCI for 
 
 ## CI/CD Flow description
 
+```
 1. The developer commits a change to the repository
 2. CircleCI detects the commit and initiates a new build
 - 2a. Builds a new Docker image.
@@ -17,10 +18,10 @@ This boilerplate is developed with easy-to-delivery in mind, using CircleCI for 
 - 3c. Copies the new version to AWS S3
 - 3d. Creates an application version at Elastic Beanstalk
 - 3e. Updates Elastic Beanstalk to the new version
+```
 
 ## Techniques used
 
-```
 [React/Redux](https://github.com/reactjs/react-redux)
 [Laravel/Lumen](https://lumen.laravel.com/)
 [Docker](https://www.docker.com/)
@@ -30,7 +31,6 @@ This boilerplate is developed with easy-to-delivery in mind, using CircleCI for 
 [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
 [AWS S3 Storage](https://aws.amazon.com/s3‎)
 [Amazon RDS](https://aws.amazon.com/rds/)
-```
 
 ## Questions?
 
