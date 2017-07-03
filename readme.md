@@ -1,8 +1,8 @@
-# Full-Stack App Boilerplate (Continuous Integration & AWS)
+# Full-Stack App Boilerplate (Docker/CI/AWS)
 
 The most perfect boilerplate project for prototyping and/or start-ups. A highly scalable and easy-to-use  full-stack app using React/Redux on the Front-End and Laravel/Lumen (optimized for Microservices) in the Back-End.
 
-This boilerplate is developed with easy-to-delivery in mind, using CircleCI for automatization of the build, ship and run processing. The default distribution platform is AWS/Elastic Beanstalk - but feel free to change it to something that matches your needs better.
+This projected is produced with easy-delivery in mind, using CircleCI for automatization of the build, ship and run cycle. The default platform for distribution is AWS (Elastic Beanstalk) - but feel free to change it to something that matches your needs better.
 
 ## CI/CD Flow description
 
@@ -34,4 +34,4 @@ This boilerplate is developed with easy-to-delivery in mind, using CircleCI for 
 
 ## Questions?
 
-Feel free to send an email: [zegoffinator@gmail.com](zegoffinator@gmail.com)
+Send me a message; [zegoffinator@gmail.com](zegoffinator@gmail.com)
