@@ -22,15 +22,15 @@ This boilerplate is developed with easy-to-delivery in mind, using CircleCI for 
 
 ## Techniques used
 
-[React/Redux](https://github.com/reactjs/react-redux)
-[Laravel/Lumen](https://lumen.laravel.com/)
-[Docker](https://www.docker.com/)
-[CircleCI](https://circleci.com/)
-[Redis (for caching)](https://redis.io/)
-[MySQL](https://www.mysql.com/)
-[AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
-[AWS S3 Storage](https://aws.amazon.com/s3‎)
-[Amazon RDS](https://aws.amazon.com/rds/)
+* [React/Redux](https://github.com/reactjs/react-redux)
+* [Laravel/Lumen](https://lumen.laravel.com/)
+* [Docker](https://www.docker.com/)
+* [CircleCI](https://circleci.com/)
+* [Redis (for caching)](https://redis.io/)
+* [MySQL](https://www.mysql.com/)
+* [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
+* [AWS S3 Storage](https://aws.amazon.com/s3‎)
+* [Amazon RDS](https://aws.amazon.com/rds/)
 
 ## Questions?
 
