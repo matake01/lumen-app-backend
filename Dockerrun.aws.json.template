@@ -1,0 +1,32 @@
+{
+    "AWSEBDockerrunVersion": "2",
+    "family": "aws-lumen-app",
+    "volumes": [
+        {
+            "name": "lumen-app-vol",
+            "host": {}
+        }
+    ],
+    "containerDefinitions": [
+        {
+            "environment": [],
+            "name": "lumen-app",
+            "image": "goffinator/aws-lumen-app",
+            "cpu": 10,
+            "memory": 500,
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80
+                }
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "lumen-app-vol",
+                    "containerPath": "/var/www/lumen-app-vol"
+                }
+            ],
+            "essential": true
+        }
+    ]
+}
