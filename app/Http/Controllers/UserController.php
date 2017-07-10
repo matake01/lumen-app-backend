@@ -1,40 +1,30 @@
 <?php namespace App\Http\Controllers;
 
-use App\Repositories\UserRepository;
-use App\Repositories\Criteria\User\IdOverHundred;
+use App\Services\UserService;
 
 use Illuminate\Http\Request as Request;
 use Illuminate\Http\JsonResponse;
+
+use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
 
     /**
-     * The user repository instance.
+     * The user service instance.
      */
-    protected $user;
+    protected $service;
 
     /**
      * Create a new controller instance.
      *
-     * @param  UserRepository  $users
      * @return void
      */
-    public function __construct(UserRepository $user)
+    public function __construct(UserService $service)
     {
-        $this->user = $user;
+        $this->service = $service;
 
         // $this->middleware('auth');
-
-        // $this->middleware('log', ['only' => [
-        //      'fooAction',
-        //      'barAction',
-        // ]]);
-
-        // $this->middleware('subscribed', ['except' => [
-        //      'fooAction',
-        //      'barActi  on',
-        // ]]);
     }
 
     /**
@@ -46,34 +36,9 @@ class UserController extends Controller
      */
     public function get(Request $request, $id)
     {
-        return "User with id => " . $id;
+        $user = $this->user->find($id);
+
+        return response()->json($user);
     }
-
-    /**
-     * Get the specified user.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function getIdOverHundred(Request $request)
-    {
-        $criteria = new IdOverHundred();
-        $data = $this->user->getByCriteria($criteria)->all();
-
-        return response()->json($data);
-    }
-
-    /**
-     * Update the specified user.
-     *
-     * @param  Request  $request
-     * @param  string  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
 
 }

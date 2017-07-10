@@ -12,8 +12,8 @@ class IdOverHundred extends Criteria {
      */
     public function apply($model, Repository $repository)
     {
-        $query = $model->where('id', '>', 1);
-        
+        $query = $model->where('id', '>', 100);
+
         return $query;
     }
 

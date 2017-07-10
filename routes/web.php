@@ -15,6 +15,10 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->get('user/{id}', 'UserController@get');
-$app->get('userOverHundred', 'UserController@getIdOverHundred');
-$app->put('user/{id}', 'UserController@update');
+$app->get('users/{id}', 'UserController@get');
+
+$app->get('messages/{id}', 'MessageController@get');
+$app->get('messages', 'MessageController@getAll');
+$app->post('messages', 'MessageController@create');
+$app->put('messages', 'MessageController@update');
+$app->delete('messages/{id}', 'MessageController@delete');
