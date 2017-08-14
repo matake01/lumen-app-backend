@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function get(Request $request, $id)
     {
-        $user = $this->user->find($id);
+        $user = $this->service->find($id);
 
         return response()->json($user);
     }

@@ -11,9 +11,11 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Message::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
+        'message' => str_random(128),
+        'user_id' => function () {
+            return factory(App\Models\User::class)->create()->id;
+        }
     ];
 });

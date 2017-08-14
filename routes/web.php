@@ -12,13 +12,17 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->version();
+    return view('index');
 });
 
-$app->get('users/{id}', 'UserController@get');
+$app->group(['prefix' => 'api/v1/'], function () use ($app) {
+  // User functions
+  $app->get('users/{id}', 'UserController@get');
 
-$app->get('messages/{id}', 'MessageController@get');
-$app->get('messages', 'MessageController@getAll');
-$app->post('messages', 'MessageController@create');
-$app->put('messages', 'MessageController@update');
-$app->delete('messages/{id}', 'MessageController@delete');
+  // Message functions
+  $app->get('messages/{id}', 'MessageController@get');
+  $app->get('messages', 'MessageController@getAll');
+  $app->post('messages', 'MessageController@create');
+  $app->put('messages', 'MessageController@update');
+  $app->delete('messages/{id}', 'MessageController@delete');
+});

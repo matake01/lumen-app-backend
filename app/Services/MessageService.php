@@ -16,7 +16,7 @@ class MessageService {
 
     public function find($id)
     {
-        return $this->message->find($id);
+        return $this->message->skipCriteria()->find($id);
     }
 
 }
