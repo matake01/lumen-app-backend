@@ -1,6 +1,8 @@
-# Full-Stack App Boilerplate (Docker/CI/AWS)
+# Message App Backend
 
-The most perfect boilerplate project for prototyping and/or start-ups. A highly scalable and easy-to-use  full-stack app using React/Redux on the Front-End and Laravel/Lumen (optimized for Microservices) in the Back-End.
+A simple event-driven and container-based app with support for APIs, JWT Auth and distribution at AWS under the Continuous Integration/Delivery principle.
+
+The most perfect boilerplate project for prototyping and/or start-ups.
 
 This projected is produced with easy-delivery in mind, using CircleCI for automatization of the build, ship and run cycle. The default platform for distribution is AWS (Elastic Beanstalk) - but feel free to change it to something that matches your needs better.
 
@@ -20,10 +22,15 @@ This projected is produced with easy-delivery in mind, using CircleCI for automa
 - 3e. Updates Elastic Beanstalk to the new version.
 ```
 
-## Techniques used
+## Application Techniques
 
-* [React/Redux](https://github.com/reactjs/react-redux)
 * [Laravel/Lumen](https://lumen.laravel.com/)
+* [JWT Auth](https://github.com/tymondesigns/jwt-auth)
+* [Dingo](https://github.com/dingo/api)
+* [Redis Client](https://github.com/nrk/predis)
+
+## Distribution Techniques
+
 * [Docker](https://www.docker.com/)
 * [CircleCI](https://circleci.com/)
 * [Redis (for caching)](https://redis.io/)
