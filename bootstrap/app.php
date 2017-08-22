@@ -1,6 +1,26 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Register The Composer Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader
+| for our application. We just need to utilize it! We'll require it
+| into the script here so that we do not have to worry about the
+| loading of any our classes "manually". Feels great to relax.
+|
+*/
+
 require_once __DIR__.'/../vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
+| Load your environment file
+|--------------------------------------------------------------------------
+|
+| You know, to load your environment file.
+*/
 
 try {
     (new Dotenv\Dotenv(__DIR__.'/../'))->load();
@@ -59,6 +79,10 @@ $app->singleton(
 |
 */
 
+$app->middleware([
+    App\Http\Middleware\CORSMiddleware::class
+]);
+
 // $app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
@@ -81,7 +105,14 @@ $app->singleton(
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\GuardServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+
+// Dingo Adapter for Lumen
+$app->register(Zeek\LumenDingoAdapter\Providers\LumenDingoAdapterServiceProvider::class);
+
+// Lumen Generator disabled it on production if you want
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -95,7 +126,7 @@ $app->register(Illuminate\Redis\RedisServiceProvider::class);
 */
 
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__.'/../routes/api.php';
 });
 
 return $app;

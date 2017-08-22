@@ -12,11 +12,10 @@
 */
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
-    static $password;
-
     return [
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => app('hash')->make($faker->unique()->password)
+        'email' => $faker->email,
+        'password' => app('hash')->make('johndoe'),
+        'remember_token' => str_random(10),
     ];
 });

@@ -1,9 +1,9 @@
 {
     "AWSEBDockerrunVersion": "2",
-    "family": "aws-lumen-app",
+    "family": "message-app-backend",
     "volumes": [
         {
-            "name": "lumen-app-vol",
+            "name": "message-app-backend-vol",
             "host": {}
         }
     ],
@@ -11,7 +11,7 @@
         {
             "environment": [],
             "name": "lumen-app",
-            "image": "goffinator/aws-lumen-app",
+            "image": "goffinator/message-app-backend",
             "cpu": 10,
             "memory": 500,
             "portMappings": [
@@ -22,8 +22,8 @@
             ],
             "mountPoints": [
                 {
-                    "sourceVolume": "lumen-app-vol",
-                    "containerPath": "/var/www/lumen-app-vol"
+                    "sourceVolume": "message-app-backend-vol",
+                    "containerPath": "/var/www/message-app-backend-vol"
                 }
             ],
             "essential": true

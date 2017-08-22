@@ -1,8 +1,7 @@
-<?php
-
-namespace App\Exceptions;
+<?php namespace App\Exceptions;
 
 use Exception;
+
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -22,7 +21,6 @@ class Handler extends ExceptionHandler
         ModelNotFoundException::class,
         ValidationException::class,
     ];
-
     /**
      * Report or log an exception.
      *
@@ -35,7 +33,6 @@ class Handler extends ExceptionHandler
     {
         parent::report($e);
     }
-
     /**
      * Render an exception into an HTTP response.
      *
@@ -47,4 +44,5 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $e);
     }
+
 }

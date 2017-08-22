@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Providers;
+<?php namespace App\Providers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -17,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         //
     }
-
+    
     /**
      * Boot the authentication services for the application.
      *
@@ -29,11 +27,9 @@ class AuthServiceProvider extends ServiceProvider
         // application. The callback which receives the incoming request instance
         // should return either a User instance or null. You're free to obtain
         // the User instance via an API token or any other method necessary.
-
         $this->app['auth']->viaRequest('api', function ($request) {
-            $apiToken = $request->input('api_token');
-            if ($apiToken) {
-                return User::where('api_token', $apiToken)->first();
+            if ($request->input('api_token')) {
+                return User::where('api_token', $request->input('api_token'))->first();
             }
         });
     }

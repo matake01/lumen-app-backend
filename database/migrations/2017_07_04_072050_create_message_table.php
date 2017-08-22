@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateMessageTable extends Migration
 {
-  
+
     /**
      * Run the migrations.
      *

@@ -65,6 +65,19 @@ class MessageController extends Controller
     }
 
     /**
+     * Get all messages.
+     *
+     * @param  Request  $request
+     * @param  string  $id
+     * @return Response
+     */
+    public function getAll(Request $request, $id)
+    {
+        return response()->json(array('test' => 1, 2, 3));
+    }
+
+
+    /**
      * Update the specified message.
      *
      * @param  Request  $request

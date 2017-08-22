@@ -7,8 +7,23 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
      */
     protected $app;
 
-    public function setUp() {
-          $this->app = $this->createApplication();
+    /**
+     * @var Faker\Generator
+     */
+    protected $faker;
+
+    public function setUp()
+    {
+
+      $this->faker = Faker\Factory::create();
+      parent::setUp();
+    }
+
+    public function tearDown()
+    {
+      parent::tearDown();
+
+      Mockery::close();
     }
 
     /**
@@ -20,4 +35,14 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
     {
         return require __DIR__.'/../bootstrap/app.php';
     }
+
+    public function mock($class)
+    {
+      $mock = Mockery::mock($class);
+
+      $this->app->instance($class, $mock);
+
+      return $mock;
+    }
+
 }
