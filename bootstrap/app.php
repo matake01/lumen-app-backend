@@ -87,9 +87,12 @@ $app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
+      'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
+     // 'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
+     'sentry' => App\Http\Middleware\SentryContext::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -104,15 +107,13 @@ $app->middleware([
 
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\GuardServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-
-// Dingo Adapter for Lumen
 $app->register(Zeek\LumenDingoAdapter\Providers\LumenDingoAdapterServiceProvider::class);
-
-// Lumen Generator disabled it on production if you want
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class);
+$app->register(Sentry\SentryLaravel\SentryLumenServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -127,6 +128,23 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../routes/api.php';
+});
+
+/*
+|--------------------------------------------------------------------------
+| Configure Monolog logging
+|--------------------------------------------------------------------------
+|
+*/
+
+$app->configureMonologUsing(function($monolog) {
+    $monolog->pushHandler((new Monolog\Handler\RotatingFileHandler(storage_path("logs/lumen-info.log"), 0, Monolog\Logger::INFO))->setFormatter(new Monolog\Formatter\LineFormatter(null, null, true, true)));
+    $monolog->pushHandler((new Monolog\Handler\RotatingFileHandler(storage_path("logs/lumen-warning.log"), 0, Monolog\Logger::WARNING))->setFormatter(new Monolog\Formatter\LineFormatter(null, null, true, true)));
+    $monolog->pushHandler((new Monolog\Handler\RotatingFileHandler(storage_path("logs/lumen-debug.log"), 0, Monolog\Logger::DEBUG))->setFormatter(new Monolog\Formatter\LineFormatter(null, null, true, true)));
+    $monolog->pushHandler((new Monolog\Handler\RotatingFileHandler(storage_path("logs/lumen-error.log"), 0, Monolog\Logger::ERROR))->setFormatter(new Monolog\Formatter\LineFormatter(null, null, true, true)));
+    $monolog->pushHandler((new Monolog\Handler\RotatingFileHandler(storage_path("logs/lumen-critical.log"), 0, Monolog\Logger::CRITICAL))->setFormatter(new Monolog\Formatter\LineFormatter(null, null, true, true)));
+
+    return $monolog;
 });
 
 return $app;

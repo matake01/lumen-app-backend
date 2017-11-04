@@ -1,5 +1,6 @@
 <?php namespace App\Http\Middleware;
 
+use Log;
 use Closure;
 use Illuminate\Http\Response;
 
@@ -15,6 +16,8 @@ class CORSMiddleware
      */
     public function handle($request, Closure $next)
     {
+        Log::debug('CORS middleware');
+
         // TODO: Should check whether route has been registered
         if ($this->isPreflightRequest($request)) {
             $response = $this->createEmptyResponse();
@@ -34,6 +37,8 @@ class CORSMiddleware
 
     protected function isPreflightRequest($request)
     {
+        Log::debug('Is Preflight Request');
+
         return $request->isMethod('OPTIONS');
     }
 
@@ -44,6 +49,8 @@ class CORSMiddleware
      */
     protected function createEmptyResponse()
     {
+        Log::debug('Create empty response');
+
         return new Response(null, 204);
     }
 
@@ -55,6 +62,8 @@ class CORSMiddleware
      */
     protected function addCorsHeaders($request, $response)
     {
+        Log::debug('Add CORS Headers');
+
         foreach ([
             'Access-Control-Allow-Origin' => '*',
             'Access-Control-Max-Age' => (60 * 60 * 24),

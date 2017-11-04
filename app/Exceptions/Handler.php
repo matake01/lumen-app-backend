@@ -31,7 +31,11 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-        parent::report($e);
+      if (app()->bound('sentry') && $this->shouldReport($e)) {
+          app('sentry')->captureException($e);
+      }
+
+      parent::report($e);
     }
     /**
      * Render an exception into an HTTP response.
@@ -42,7 +46,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+      if ($e instanceof Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+        return response()->json(['token_expired'], $e->getStatusCode());
+      } else if ($e instanceof Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+        return response()->json(['token_invalid'], $e->getStatusCode());
+      }
+
+      return parent::render($request, $e);
     }
 
 }

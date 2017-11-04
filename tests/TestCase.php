@@ -1,22 +1,21 @@
-<?php
+<?php namespace Tests;
 
-abstract class TestCase extends Laravel\Lumen\Testing\TestCase
+use Mockery;
+
+use Laravel\Lumen\Testing\DatabaseMigrations;
+
+abstract class TestCase extends \Laravel\Lumen\Testing\TestCase
 {
-    /**
-     *  The application instance
-     */
-    protected $app;
 
-    /**
-     * @var Faker\Generator
-     */
+    use DatabaseMigrations, CreatesApplication;
+
     protected $faker;
 
     public function setUp()
     {
-
-      $this->faker = Faker\Factory::create();
       parent::setUp();
+
+      $this->faker = \Faker\Factory::create();
     }
 
     public function tearDown()
@@ -24,16 +23,6 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
       parent::tearDown();
 
       Mockery::close();
-    }
-
-    /**
-     * Creates the application.
-     *
-     * @return \Laravel\Lumen\Application
-     */
-    public function createApplication()
-    {
-        return require __DIR__.'/../bootstrap/app.php';
     }
 
     public function mock($class)

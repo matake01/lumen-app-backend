@@ -3,8 +3,7 @@
 use App\Services\MessageService;
 use App\Models\Message;
 
-use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class MessageServiceTest extends TestCase
 {

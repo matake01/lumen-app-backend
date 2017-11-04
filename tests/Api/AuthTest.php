@@ -1,11 +1,9 @@
-<?php
+<?php namespace Tests\Api;
 
-use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
-    use DatabaseMigrations;
 
     /**
      * Test to login with invalid credentials
@@ -41,4 +39,5 @@ class AuthTest extends TestCase
         ])
         ->assertResponseOk();
     }
+
 }

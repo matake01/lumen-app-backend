@@ -2,6 +2,9 @@
 
 use App\Repositories\MessageRepository;
 
+use Log;
+use Exception;
+
 class MessageService {
 
     /**
@@ -16,6 +19,8 @@ class MessageService {
 
     public function find($id)
     {
+        app('sentry')->captureMessage("Testar lite");
+
         return $this->message->skipCriteria()->find($id);
     }
 

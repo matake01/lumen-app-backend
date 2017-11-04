@@ -28,6 +28,7 @@ This projected is produced with easy-delivery in mind, using CircleCI for automa
 * [JWT Auth](https://github.com/tymondesigns/jwt-auth)
 * [Dingo](https://github.com/dingo/api)
 * [Redis Client](https://github.com/nrk/predis)
+* [Sentry](https://sentry.io/)
 
 ## Distribution Techniques
 

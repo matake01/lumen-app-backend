@@ -11,11 +11,12 @@
 |
 */
 
-$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (\Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => app('hash')->make('johndoe'),
-        'remember_token' => str_random(10),
+        'username' => str_replace('.', '', $faker->unique()->userName),
+        'email' => $faker->unique()->safeEmail,
+        'password' => 'secret',
+        'bio' => $faker->sentence,
+        'image' => 'https://cdn.worldvectorlogo.com/logos/laravel.svg'
     ];
 });

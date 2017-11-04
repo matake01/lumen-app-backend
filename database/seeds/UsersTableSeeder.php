@@ -13,6 +13,6 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->truncate();
 
-        $users = factory('App\Models\User', 0)->create();
+        $users = factory('App\Models\User', 1)->create();
     }
 }

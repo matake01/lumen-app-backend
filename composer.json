@@ -10,7 +10,9 @@
         "vlucas/phpdotenv": "~2.2",
         "predis/predis": "~1.0",
         "illuminate/redis": "5.4.*",
-        "krisanalfa/lumen-dingo-adapter": "^0.0.3"
+        "krisanalfa/lumen-dingo-adapter": "^0.0.3",
+        "sentry/sentry-laravel": "^0.8.0",
+        "laravelista/lumen-vendor-publish": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

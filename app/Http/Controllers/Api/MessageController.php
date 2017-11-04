@@ -1,11 +1,13 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Api;
 
 use App\Services\MessageService;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request as Request;
 use Illuminate\Http\JsonResponse;
 
 use Illuminate\Support\Facades\Cache;
+
+use Log;
 
 class MessageController extends Controller
 {
@@ -24,8 +26,6 @@ class MessageController extends Controller
     public function __construct(MessageService $service)
     {
         $this->service = $service;
-
-        // $this->middleware('auth');
     }
 
     /**
@@ -36,6 +36,7 @@ class MessageController extends Controller
      */
     public function create(Request $request)
     {
+      Log::debug('Create message');
 
     }
 
@@ -47,6 +48,7 @@ class MessageController extends Controller
      */
     public function delete(Request $request, $id)
     {
+      Log::debug('Delete message');
 
     }
 
@@ -59,6 +61,8 @@ class MessageController extends Controller
      */
     public function get(Request $request, $id)
     {
+        Log::debug('Get message');
+
         $message = $this->service->find($id);
 
         return response()->json($message);
@@ -73,6 +77,8 @@ class MessageController extends Controller
      */
     public function getAll(Request $request, $id)
     {
+        Log::debug('Get all messages');
+
         return response()->json(array('test' => 1, 2, 3));
     }
 
@@ -86,6 +92,8 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Log::debug('Update message');
+
         //
     }
 

@@ -24,8 +24,8 @@ class UserService {
     public function find($id) {
         $criteria = new IdOverHundred();
 
-    #    $data = $this->user->getByCriteria($criteria)->all();
-        $data = $this->user->skipCriteria()->find($id);
+        $data = $this->user->getByCriteria($criteria)->all();
+    #    $data = $this->user->skipCriteria()->find($id);
 
         return $data;
     }

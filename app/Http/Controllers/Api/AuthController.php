@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Auth;
+<?php namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -9,8 +9,27 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exception\HttpResponseException;
 
+use App\Services\UserService;
+
+use Log;
+
 class AuthController extends Controller
 {
+    /**
+     * The user service instance.
+     */
+    protected $service;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(UserService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Handle a login request to the application.
      *
@@ -18,8 +37,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function postLogin(Request $request)
+    public function login(Request $request)
     {
+        Log::debug('Login user');
+
         try {
             $this->validate($request, [
                 'email' => 'required|email|max:255',
@@ -41,6 +62,8 @@ class AuthController extends Controller
             return $this->onJwtGenerationError();
         }
 
+        app('sentry')->captureMessage('User logged in!');
+
         // All good so return the token
         return $this->onAuthorized($token);
     }
@@ -52,6 +75,8 @@ class AuthController extends Controller
      */
     protected function onUnauthorized()
     {
+        Log::debug('User unauthorized');
+
         return new JsonResponse([
             'message' => 'invalid_credentials'
         ], Response::HTTP_UNAUTHORIZED);
@@ -64,6 +89,8 @@ class AuthController extends Controller
      */
     protected function onJwtGenerationError()
     {
+        Log::debug('JWT generation failed');
+
         return new JsonResponse([
             'message' => 'could_not_create_token'
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -76,6 +103,8 @@ class AuthController extends Controller
      */
     protected function onAuthorized($token)
     {
+        Log::debug('User authorized');
+
         return new JsonResponse([
             'message' => 'token_generated',
             'data' => [
@@ -93,6 +122,8 @@ class AuthController extends Controller
      */
     protected function getCredentials(Request $request)
     {
+        Log::debug('Get credentials');
+
         return $request->only('email', 'password');
     }
 
@@ -101,8 +132,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function deleteInvalidate()
+    public function invalidateToken()
     {
+        Log::debug('Invalidate token');
+
         $token = JWTAuth::parseToken();
         $token->invalidate();
         return new JsonResponse(['message' => 'token_invalidated']);
@@ -113,8 +146,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function patchRefresh()
+    public function refreshToken()
     {
+        Log::debug('Refresh token');
+
         $token = JWTAuth::parseToken();
         $newToken = $token->refresh();
         return new JsonResponse([
@@ -130,8 +165,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getUser()
+    public function getUser(Request $request)
     {
+        Log::debug('Get user');
+
         return new JsonResponse([
             'message' => 'authenticated_user',
             'data' => JWTAuth::parseToken()->authenticate()

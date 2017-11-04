@@ -17,55 +17,55 @@ $api->version('v1', function ($api) {
 
     $api->post('/auth/login', [
         'as' => 'api.auth.login',
-        'uses' => 'App\Http\Controllers\Auth\AuthController@postLogin',
+        'uses' => 'App\Http\Controllers\Api\AuthController@login',
     ]);
 
     $api->group([
-        'middleware' => 'api.auth',
+         'middleware' => [ 'jwt.auth' ]
     ], function ($api) {
 
         $api->get('/auth/user', [
-            'uses' => 'App\Http\Controllers\Auth\AuthController@getUser',
+            'uses' => 'App\Http\Controllers\Api\AuthController@getUser',
             'as' => 'api.auth.user'
         ]);
 
         $api->patch('/auth/refresh', [
-            'uses' => 'App\Http\Controllers\Auth\AuthController@patchRefresh',
+            'uses' => 'App\Http\Controllers\Api\AuthController@refreshToken',
             'as' => 'api.auth.refresh'
         ]);
 
         $api->delete('/auth/invalidate', [
-            'uses' => 'App\Http\Controllers\Auth\AuthController@deleteInvalidate',
+            'uses' => 'App\Http\Controllers\Api\AuthController@invalidateToken',
             'as' => 'api.auth.invalidate'
         ]);
     });
 
     $api->group([
-        'middleware' => 'api.auth',
+        'middleware' => 'jwt.auth',
     ], function ($api) {
 
         $api->get('/messages/{id}', [
-            'uses' => 'App\Http\Controllers\MessageController@get',
+            'uses' => 'App\Http\Controllers\Api\MessageController@get',
             'as' => 'api.messages.id'
         ]);
 
         $api->get('/messages', [
-            'uses' => 'App\Http\Controllers\MessageController@getAll',
+            'uses' => 'App\Http\Controllers\Api\MessageController@getAll',
             'as' => 'api.messages.all'
         ]);
 
         $api->post('/messages', [
-            'uses' => 'App\Http\Controllers\MessageController@create',
+            'uses' => 'App\Http\Controllers\Api\MessageController@create',
             'as' => 'api.messages.create'
         ]);
 
         $api->put('/messages', [
-            'uses' => 'App\Http\Controllers\MessageController@update',
+            'uses' => 'App\Http\Controllers\Api\MessageController@update',
             'as' => 'api.messages.update'
         ]);
 
         $api->delete('/messages/{id}', [
-            'uses' => 'App\Http\Controllers\MessageController@delete',
+            'uses' => 'App\Http\Controllers\Api\MessageController@delete',
             'as' => 'api.messages.delete'
         ]);
 
